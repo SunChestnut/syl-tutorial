@@ -1,6 +1,12 @@
 ---
+import '../styles/global.css';
+
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+
+// import Navigation from '../components/Navigation.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
 
 const pageTitle = "关于我";
 
@@ -15,6 +21,10 @@ const skills = ["GoLang", "Java", "Photoshop"]
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 
@@ -49,12 +59,22 @@ const goal = 3;
             </defs>
         </svg>
 
-        <a href="/">首页</a>
-        <a href="/about/">关于</a>
-        <a href="/blog">博客</a>
+        <!--<a href="/">首页</a>-->
+        <!--<a href="/about/">关于</a>-->
+        <!--<a href="/blog">博客</a>-->
+
+        <!--<Navigation/>-->
+
+        <Header/>
 
         <h1>Welcome to <span class="text-gradient">我的 Astro 站点</span></h1>
         <h1>{pageTitle}</h1>
+        <style>
+            h1 {
+                color: purple;
+                font-size: 4rem;
+            }
+        </style>
         <p>随着我完成更多教程，该站点将更新，所以请继续查看我的旅程将如何进行吧！</p>
 
         <p>以下是关于我的几个事实：</p>
@@ -65,13 +85,11 @@ const goal = 3;
         <p>我的技能是：</p>
         <ul>
             {skills.map((skill) =>
-                    <li>{skill}</li>)}
+                    <li class="skill">{skill}</li>)}
         </ul>
 
         {happy && <p>我非常乐意学习Astro！</p>}
-
         {finished && <p>我完成了这节教程！</p>}
-
         {goal === 3 ? <p>我的目标是在三天内完成。</p> : <p>我的目标不是3天。</p>}
 
         <p class="instructions">
@@ -100,10 +118,21 @@ const goal = 3;
                     body="Come say hi to our amazing Discord community. ❤️"
             />
         </ul>
+
+        <Footer/>
+        <script>
+            import "../scripts/menu.js"
+        </script>
     </main>
 </Layout>
 
-<style>
+<style define:vars={{skillColor, fontWeight, textCase}}>
+    :root {
+        --skillColor: "navy";
+        --fontWeight: "bold";
+        --textCase: "uppercase";
+    }
+
     main {
         margin: auto;
         padding: 1rem;
@@ -112,6 +141,12 @@ const goal = 3;
         color: white;
         font-size: 20px;
         line-height: 1.6;
+    }
+
+    .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
     }
 
     .astro-a {
