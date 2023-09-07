@@ -4,12 +4,11 @@ import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 
+// import Navigation from '../components/Navigation.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 
-import BlogPost from '../components/BlogPost.astro'
-
-const allPosts = await Astro.glob('../pages/posts/*.md')
+const {pageTitle} = Astro.props;
 ---
 
 <Layout title="Welcome to Astro.">
@@ -43,12 +42,15 @@ const allPosts = await Astro.glob('../pages/posts/*.md')
             </defs>
         </svg>
 
+        <!--<a href="/">首页</a>-->
+        <!--<a href="/about/">关于</a>-->
+        <!--<a href="/blog">博客</a>-->
+
+        <!--<Navigation/>-->
+
         <Header/>
 
         <!--<h1>Welcome to <span class="text-gradient">我的 Astro 站点</span></h1>-->
-        <!--<h1>我的 Astro 学习博客</h1>-->
-        <!--<p>在这里，我将分享我的学习 Astro 之旅。</p>-->
-
         <!--<p class="instructions">-->
         <!--    To get started, open the directory <code>src/pages</code> in your project.<br/>-->
         <!--    <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.-->
@@ -76,12 +78,8 @@ const allPosts = await Astro.glob('../pages/posts/*.md')
         <!--    />-->
         <!--</ul>-->
 
-        <ul>
-            {allPosts.map((post) =>
-                    <BlogPost url={post.url} title={post.frontmatter.title}/>)}
-        </ul>
-
-        <Footer/>
+        <slot/>
+        <!--<Footer/>-->
         <script>
             import "../scripts/menu.js"
         </script>
